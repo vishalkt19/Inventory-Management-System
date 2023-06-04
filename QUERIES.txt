@@ -1,0 +1,669 @@
+
+-- --------------------------------------------------------
+TABLE CREATION AND INSERTION
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE IF NOT EXISTS `categories` (
+`id` int(11) unsigned NOT NULL,
+  `name` varchar(60) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'Demo Category'),
+(3, 'Finished Goods'),
+(5, 'Machinery'),
+(4, 'Packing Materials'),
+(2, 'Raw Materials'),
+(8, 'Stationery Items'),
+(6, 'Work in Progress');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `media`
+--
+
+CREATE TABLE IF NOT EXISTS `media` (
+`id` int(11) unsigned NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `file_type` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE IF NOT EXISTS `products` (
+`id` int(11) unsigned NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `quantity` varchar(50) DEFAULT NULL,
+  `buy_price` decimal(25,2) DEFAULT NULL,
+  `sale_price` decimal(25,2) NOT NULL,
+  `categorie_id` int(11) unsigned NOT NULL,
+  `media_id` int(11) DEFAULT '0',
+  `date` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `quantity`, `buy_price`, `sale_price`, `categorie_id`, `media_id`, `date`) VALUES
+(1, 'Demo Product', '48', '100.00', '500.00', 1, 0, '2021-04-04 16:45:51'),
+(2, 'Box Varieties', '12000', '55.00', '130.00', 4, 0, '2021-04-04 18:44:52'),
+(3, 'Wheat', '69', '2.00', '5.00', 2, 0, '2021-04-04 18:48:53'),
+(4, 'Timber', '1200', '780.00', '1069.00', 2, 0, '2021-04-04 19:03:23'),
+(5, 'W1848 Oscillating Floor Drill Press', '26', '299.00', '494.00', 5, 0, '2021-04-04 19:11:30'),
+(6, 'Portable Band Saw XBP02Z', '42', '280.00', '415.00', 5, 0, '2021-04-04 19:13:35'),
+(7, 'Life Breakfast Cereal-3 Pk', '107', '3.00', '7.00', 3, 0, '2021-04-04 19:15:38'),
+(8, 'Chicken of the Sea Sardines W', '110', '13.00', '20.00', 3, 0, '2021-04-04 19:17:11'),
+(9, 'Disney Woody - Action Figure', '67', '29.00', '55.00', 3, 0, '2021-04-04 19:19:20'),
+(10, 'Hasbro Marvel Legends Series Toys', '106', '219.00', '322.00', 3, 0, '2021-04-04 19:20:28'),
+(11, 'Packing Chips', '78', '21.00', '31.00', 4, 0, '2021-04-04 19:25:22'),
+(12, 'Classic Desktop Tape Dispenser 38', '160', '5.00', '10.00', 8, 0, '2021-04-04 19:48:01'),
+(13, 'Small Bubble Cushioning Wrap', '199', '8.00', '19.00', 4, 0, '2021-04-04 19:49:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sales`
+--
+
+CREATE TABLE IF NOT EXISTS `sales` (
+`id` int(11) unsigned NOT NULL,
+  `product_id` int(11) unsigned NOT NULL,
+  `qty` int(11) NOT NULL,
+  `price` decimal(25,2) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sales`
+--
+
+INSERT INTO `sales` (`id`, `product_id`, `qty`, `price`, `date`) VALUES
+(1, 1, 2, '1000.00', '2021-04-04'),
+(2, 3, 3, '15.00', '2021-04-04'),
+(3, 10, 6, '1932.00', '2021-04-04'),
+(4, 6, 2, '830.00', '2021-04-04'),
+(5, 12, 5, '50.00', '2021-04-04'),
+(6, 13, 21, '399.00', '2021-04-04'),
+(7, 7, 5, '35.00', '2021-04-04'),
+(8, 9, 2, '110.00', '2021-04-04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+`id` int(11) unsigned NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `user_level` int(11) NOT NULL,
+  `image` varchar(255) DEFAULT 'no_image.jpg',
+  `status` int(1) NOT NULL,
+  `last_login` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `username`, `password`, `user_level`, `image`, `status`, `last_login`) VALUES
+(1, 'Harry Denn', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'no_image.png', 1, '2021-04-04 19:45:52'),
+(2, 'John Walker', 'special', 'ba36b97a41e7faf742ab09bf88405ac04f99599a', 2, 'no_image.png', 1, '2021-04-04 19:53:26'),
+(3, 'Christopher', 'user', '12dea96fec20593566ab75692c9949596833adc9', 3, 'no_image.png', 1, '2021-04-04 19:54:46'),
+(4, 'Natie Williams', 'natie', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 3, 'no_image.png', 1, NULL),
+(5, 'Kevin', 'kevin', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 3, 'no_image.png', 1, '2021-04-04 19:54:29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_groups`
+--
+
+CREATE TABLE IF NOT EXISTS `user_groups` (
+`id` int(11) NOT NULL,
+  `group_name` varchar(150) NOT NULL,
+  `group_level` int(11) NOT NULL,
+  `group_status` int(1) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_groups`
+--
+
+INSERT INTO `user_groups` (`id`, `group_name`, `group_level`, `group_status`) VALUES
+(1, 'Admin', 1, 1),
+(2, 'special', 2, 1),
+(3, 'User', 3, 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `media`
+--
+ALTER TABLE `media`
+ ADD PRIMARY KEY (`id`), ADD KEY `id` (`id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`), ADD KEY `categorie_id` (`categorie_id`), ADD KEY `media_id` (`media_id`);
+
+--
+-- Indexes for table `sales`
+--
+ALTER TABLE `sales`
+ ADD PRIMARY KEY (`id`), ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+ ADD PRIMARY KEY (`id`), ADD KEY `user_level` (`user_level`);
+
+--
+-- Indexes for table `user_groups`
+--
+ALTER TABLE `user_groups`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `group_level` (`group_level`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `media`
+--
+ALTER TABLE `media`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT for table `sales`
+--
+ALTER TABLE `sales`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `user_groups`
+--
+ALTER TABLE `user_groups`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+ADD CONSTRAINT `FK_products` FOREIGN KEY (`categorie_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sales`
+--
+ALTER TABLE `sales`
+ADD CONSTRAINT `SK` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+ADD CONSTRAINT `FK_user` FOREIGN KEY (`user_level`) REFERENCES `user_groups` (`group_level`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------QUARIES!!!!!---------------------------------
+
+
+/*--------------------------------------------------------------*/
+/* Function for find all database table rows by table name
+/*--------------------------------------------------------------*/
+function find_all($table) {
+   global $db;
+   if(tableExists($table))
+   {
+     return find_by_sql("SELECT * FROM ".$db->escape($table));
+   }
+}
+
+/*--------------------------------------------------------------*/
+/*  Function for Find data from table by id
+/*--------------------------------------------------------------*/
+function find_by_id($table,$id)
+{
+  global $db;
+  $id = (int)$id;
+    if(tableExists($table)){
+          $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE id='{$db->escape($id)}' LIMIT 1");
+          if($result = $db->fetch_assoc($sql))
+            return $result;
+          else
+            return null;
+     }
+}
+/*--------------------------------------------------------------*/
+/* Function for Delete data from table by id
+/*--------------------------------------------------------------*/
+function delete_by_id($table,$id)
+{
+  global $db;
+  if(tableExists($table))
+   {
+    $sql = "DELETE FROM ".$db->escape($table);
+    $sql .= " WHERE id=". $db->escape($id);
+    $sql .= " LIMIT 1";
+    $db->query($sql);
+    return ($db->affected_rows() === 1) ? true : false;
+   }
+}
+/*--------------------------------------------------------------*/
+/* Function for Count id  By table name
+/*--------------------------------------------------------------*/
+
+function count_by_id($table){
+  global $db;
+  if(tableExists($table))
+  {
+    $sql    = "SELECT COUNT(id) AS total FROM ".$db->escape($table);
+    $result = $db->query($sql);
+     return($db->fetch_assoc($result));
+  }
+}
+/*--------------------------------------------------------------*/
+/* Determine if database table exists
+/*--------------------------------------------------------------*/
+function tableExists($table){
+  global $db;
+  $table_exit = $db->query('SHOW TABLES FROM '.DB_NAME.' LIKE "'.$db->escape($table).'"');
+      if($table_exit) {
+        if($db->num_rows($table_exit) > 0)
+              return true;
+         else
+              return false;
+      }
+  }
+ /*--------------------------------------------------------------*/
+ /* Login with the data provided in $_POST,
+ /* coming from the login form.
+/*--------------------------------------------------------------*/
+  function authenticate($username='', $password='') {
+    global $db;
+    $username = $db->escape($username);
+    $password = $db->escape($password);
+    $sql  = sprintf("SELECT id,username,password,user_level FROM users WHERE username ='%s' LIMIT 1", $username);
+    $result = $db->query($sql);
+    if($db->num_rows($result)){
+      $user = $db->fetch_assoc($result);
+      $password_request = sha1($password);
+      if($password_request === $user['password'] ){
+        return $user['id'];
+      }
+    }
+   return false;
+  }
+  /*--------------------------------------------------------------*/
+  /* Login with the data provided in $_POST,
+  /* coming from the login_v2.php form.
+  /* If you used this method then remove authenticate function.
+ /*--------------------------------------------------------------*/
+   function authenticate_v2($username='', $password='') {
+     global $db;
+     $username = $db->escape($username);
+     $password = $db->escape($password);
+     $sql  = sprintf("SELECT id,username,password,user_level FROM users WHERE username ='%s' LIMIT 1", $username);
+     $result = $db->query($sql);
+     if($db->num_rows($result)){
+       $user = $db->fetch_assoc($result);
+       $password_request = sha1($password);
+       if($password_request === $user['password'] ){
+         return $user;
+       }
+     }
+    return false;
+   }
+
+
+  /*--------------------------------------------------------------*/
+  /* Find current log in user by session id
+  /*--------------------------------------------------------------*/
+  function current_user(){
+      static $current_user;
+      global $db;
+      if(!$current_user){
+         if(isset($_SESSION['user_id'])):
+             $user_id = intval($_SESSION['user_id']);
+             $current_user = find_by_id('users',$user_id);
+        endif;
+      }
+    return $current_user;
+  }
+  /*--------------------------------------------------------------*/
+  /* Find all user by
+  /* Joining users table and user gropus table
+  /*--------------------------------------------------------------*/
+  function find_all_user(){
+      global $db;
+      $results = array();
+      $sql = "SELECT u.id,u.name,u.username,u.user_level,u.status,u.last_login,";
+      $sql .="g.group_name ";
+      $sql .="FROM users u ";
+      $sql .="LEFT JOIN user_groups g ";
+      $sql .="ON g.group_level=u.user_level ORDER BY u.name ASC";
+      $result = find_by_sql($sql);
+      return $result;
+  }
+  /*--------------------------------------------------------------*/
+  /* Function to update the last log in of a user
+  /*--------------------------------------------------------------*/
+
+ function updateLastLogIn($user_id)
+	{
+		global $db;
+    $date = make_date();
+    $sql = "UPDATE users SET last_login='{$date}' WHERE id ='{$user_id}' LIMIT 1";
+    $result = $db->query($sql);
+    return ($result && $db->affected_rows() === 1 ? true : false);
+	}
+
+  /*--------------------------------------------------------------*/
+  /* Find all Group name
+  /*--------------------------------------------------------------*/
+  function find_by_groupName($val)
+  {
+    global $db;
+    $sql = "SELECT group_name FROM user_groups WHERE group_name = '{$db->escape($val)}' LIMIT 1 ";
+    $result = $db->query($sql);
+    return($db->num_rows($result) === 0 ? true : false);
+  }
+  /*--------------------------------------------------------------*/
+  /* Find group level
+  /*--------------------------------------------------------------*/
+  function find_by_groupLevel($level)
+  {
+    global $db;
+    $sql = "SELECT group_level FROM user_groups WHERE group_level = '{$db->escape($level)}' LIMIT 1 ";
+    $result = $db->query($sql);
+    return($db->num_rows($result) === 0 ? true : false);
+  }
+  /*--------------------------------------------------------------*/
+  /* Function for cheaking which user level has access to page
+  /*--------------------------------------------------------------*/
+   function page_require_level($require_level){
+     global $session;
+     $current_user = current_user();
+     $login_level = find_by_groupLevel($current_user['user_level']);
+     //if user not login
+     if (!$session->isUserLoggedIn(true)):
+            $session->msg('d','Please login...');
+            redirect('index.php', false);
+      //if Group status Deactive
+     elseif($login_level['group_status'] === '0'):
+           $session->msg('d','This level user has been band!');
+           redirect('home.php',false);
+      //cheackin log in User level and Require level is Less than or equal to
+     elseif($current_user['user_level'] <= (int)$require_level):
+              return true;
+      else:
+            $session->msg("d", "Sorry! you dont have permission to view the page.");
+            redirect('home.php', false);
+        endif;
+
+     }
+   /*--------------------------------------------------------------*/
+   /* Function for Finding all product name
+   /* JOIN with categorie  and media database table
+   /*--------------------------------------------------------------*/
+  function join_product_table(){
+     global $db;
+     $sql  =" SELECT p.id,p.name,p.quantity,p.buy_price,p.sale_price,p.media_id,p.date,c.name";
+    $sql  .=" AS categorie,m.file_name AS image";
+    $sql  .=" FROM products p";
+    $sql  .=" LEFT JOIN categories c ON c.id = p.categorie_id";
+    $sql  .=" LEFT JOIN media m ON m.id = p.media_id";
+    $sql  .=" ORDER BY p.id ASC";
+    return find_by_sql($sql);
+
+   }
+  /*--------------------------------------------------------------*/
+  /* Function for Finding all product name
+  /* Request coming from ajax.php for auto suggest
+  /*--------------------------------------------------------------*/
+
+   function find_product_by_title($product_name){
+     global $db;
+     $p_name = remove_junk($db->escape($product_name));
+     $sql = "SELECT name FROM products WHERE name like '%$p_name%' LIMIT 5";
+     $result = find_by_sql($sql);
+     return $result;
+   }
+
+  /*--------------------------------------------------------------*/
+  /* Function for Finding all product info by product title
+  /* Request coming from ajax.php
+  /*--------------------------------------------------------------*/
+  function find_all_product_info_by_title($title){
+    global $db;
+    $sql  = "SELECT * FROM products ";
+    $sql .= " WHERE name ='{$title}'";
+    $sql .=" LIMIT 1";
+    return find_by_sql($sql);
+  }
+
+  /*--------------------------------------------------------------*/
+  /* Function for Update product quantity
+  /*--------------------------------------------------------------*/
+  function update_product_qty($qty,$p_id){
+    global $db;
+    $qty = (int) $qty;
+    $id  = (int)$p_id;
+    $sql = "UPDATE products SET quantity=quantity -'{$qty}' WHERE id = '{$id}'";
+    $result = $db->query($sql);
+    return($db->affected_rows() === 1 ? true : false);
+
+  }
+  /*--------------------------------------------------------------*/
+  /* Function for Display Recent product Added
+  /*--------------------------------------------------------------*/
+ function find_recent_product_added($limit){
+   global $db;
+   $sql   = " SELECT p.id,p.name,p.sale_price,p.media_id,c.name AS categorie,";
+   $sql  .= "m.file_name AS image FROM products p";
+   $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
+   $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
+   $sql  .= " ORDER BY p.id DESC LIMIT ".$db->escape((int)$limit);
+   return find_by_sql($sql);
+ }
+ /*--------------------------------------------------------------*/
+ /* Function for Find Highest saleing Product
+ /*--------------------------------------------------------------*/
+ function find_higest_saleing_product($limit){
+   global $db;
+   $sql  = "SELECT p.name, COUNT(s.product_id) AS totalSold, SUM(s.qty) AS totalQty";
+   $sql .= " FROM sales s";
+   $sql .= " LEFT JOIN products p ON p.id = s.product_id ";
+   $sql .= " GROUP BY s.product_id";
+   $sql .= " ORDER BY SUM(s.qty) DESC LIMIT ".$db->escape((int)$limit);
+   return $db->query($sql);
+ }
+ /*--------------------------------------------------------------*/
+ /* Function for find all sales
+ /*--------------------------------------------------------------*/
+ function find_all_sale(){
+   global $db;
+   $sql  = "SELECT s.id,s.qty,s.price,s.date,p.name";
+   $sql .= " FROM sales s";
+   $sql .= " LEFT JOIN products p ON s.product_id = p.id";
+   $sql .= " ORDER BY s.date DESC";
+   return find_by_sql($sql);
+ }
+ /*--------------------------------------------------------------*/
+ /* Function for Display Recent sale
+ /*--------------------------------------------------------------*/
+function find_recent_sale_added($limit){
+  global $db;
+  $sql  = "SELECT s.id,s.qty,s.price,s.date,p.name";
+  $sql .= " FROM sales s";
+  $sql .= " LEFT JOIN products p ON s.product_id = p.id";
+  $sql .= " ORDER BY s.date DESC LIMIT ".$db->escape((int)$limit);
+  return find_by_sql($sql);
+}
+/*--------------------------------------------------------------*/
+/* Function for Generate sales report by two dates
+/*--------------------------------------------------------------*/
+function find_sale_by_dates($start_date,$end_date){
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = "SELECT s.date, p.name,p.sale_price,p.buy_price,";
+  $sql .= "COUNT(s.product_id) AS total_records,";
+  $sql .= "SUM(s.qty) AS total_sales,";
+  $sql .= "SUM(p.sale_price * s.qty) AS total_saleing_price,";
+  $sql .= "SUM(p.buy_price * s.qty) AS total_buying_price ";
+  $sql .= "FROM sales s ";
+  $sql .= "LEFT JOIN products p ON s.product_id = p.id";
+  $sql .= " WHERE s.date BETWEEN '{$start_date}' AND '{$end_date}'";
+  $sql .= " GROUP BY DATE(s.date),p.name";
+  $sql .= " ORDER BY DATE(s.date) DESC";
+  return $db->query($sql);
+}
+/*--------------------------------------------------------------*/
+/* Function for Generate Daily sales report
+/*--------------------------------------------------------------*/
+function  dailySales($year,$month){
+  global $db;
+  $sql  = "SELECT s.qty,";
+  $sql .= " DATE_FORMAT(s.date, '%Y-%m-%e') AS date,p.name,";
+  $sql .= "SUM(p.sale_price * s.qty) AS total_saleing_price";
+  $sql .= " FROM sales s";
+  $sql .= " LEFT JOIN products p ON s.product_id = p.id";
+  $sql .= " WHERE DATE_FORMAT(s.date, '%Y-%m' ) = '{$year}-{$month}'";
+  $sql .= " GROUP BY DATE_FORMAT( s.date,  '%e' ),s.product_id";
+  return find_by_sql($sql);
+}
+/*--------------------------------------------------------------*/
+/* Function for Generate Monthly sales report
+/*--------------------------------------------------------------*/
+function  monthlySales($year){
+  global $db;
+  $sql  = "SELECT s.qty,";
+  $sql .= " DATE_FORMAT(s.date, '%Y-%m-%e') AS date,p.name,";
+  $sql .= "SUM(p.sale_price * s.qty) AS total_saleing_price";
+  $sql .= " FROM sales s";
+  $sql .= " LEFT JOIN products p ON s.product_id = p.id";
+  $sql .= " WHERE DATE_FORMAT(s.date, '%Y' ) = '{$year}'";
+  $sql .= " GROUP BY DATE_FORMAT( s.date,  '%c' ),s.product_id";
+  $sql .= " ORDER BY date_format(s.date, '%c' ) ASC";
+  return find_by_sql($sql);
+}
+-------------------------------------------------------------------------------------------------
+EDITING THE TABLE
+---------------------------------------------------------------------------------------------
+
+ADD GROUPS
+-----------------------------------------------------
+
+ $query  = "INSERT INTO user_groups (";
+        $query .="group_name,group_level,group_status";
+        $query .=") VALUES (";
+        $query .=" '{$name}', '{$level}','{$status}'";
+        $query .=")";
+
+ADD PRODUCT
+-----------------------------------------------------
+
+$query  = "INSERT INTO products (";
+     $query .=" name,quantity,buy_price,sale_price,categorie_id,media_id,date";
+     $query .=") VALUES (";
+     $query .=" '{$p_name}', '{$p_qty}', '{$p_buy}', '{$p_sale}', '{$p_cat}', '{$media_id}', '{$date}'";
+     $query .=")";
+     $query .=" ON DUPLICATE KEY UPDATE name='{$p_name}'";
+
+ADD SALES
+-----------------------------------------------------
+
+$sql  = "INSERT INTO sales (";
+          $sql .= " product_id,qty,price,date";
+          $sql .= ") VALUES (";
+          $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$s_date}'";
+          $sql .= ")";
+
+ADD USER
+-----------------------------------------------------
+$query = "INSERT INTO users (";
+        $query .="name,username,password,user_level,status";
+        $query .=") VALUES (";
+        $query .=" '{$name}', '{$username}', '{$password}', '{$user_level}','1'";
+        $query .=")";
+
+INSERT TO CATAGORY
+-----------------------------------------------------
+$sql  = "INSERT INTO categories (name)";
+      $sql .= " VALUES ('{$cat_name}')";
+
+UPDATE PASSWORD
+-----------------------------------------------------
+ $sql = "UPDATE users SET password ='{$new}' WHERE id='{$db->escape($id)}'";
+
+EDIT ACCOUNT
+------------------------------------------------------
+$sql = "UPDATE users SET name ='{$name}', username ='{$username}' WHERE id='{$id}'";
+
+EDIT CATAGORY
+------------------------------------------------------
+ $sql = "UPDATE categories SET name='{$cat_name}'";
+       $sql .= " WHERE id='{$categorie['id']}'";
+
+EDIT GROUP
+------------------------------------------------------
+$query  = "UPDATE user_groups SET ";
+        $query .= "group_name='{$name}',group_level='{$level}',group_status='{$status}'";
+        $query .= "WHERE ID='{$db->escape($e_group['id'])}'";
+
+EDIT PRODUCT
+------------------------------------------------------
+$query   = "UPDATE products SET";
+       $query  .=" name ='{$p_name}', quantity ='{$p_qty}',";
+       $query  .=" buy_price ='{$p_buy}', sale_price ='{$p_sale}', categorie_id ='{$p_cat}',media_id='{$media_id}'";
+       $query  .=" WHERE id ='{$product['id']}'";
+
+EDIT SALES
+-----------------------------------------------------
+$sql  = "UPDATE sales SET";
+          $sql .= " product_id= '{$p_id}',qty={$s_qty},price='{$s_total}',date='{$s_date}'";
+          $sql .= " WHERE id ='{$sale['id']}'";
+
+EDIT USER
+----------------------------------------------------
+$sql = "UPDATE users SET name ='{$name}', username ='{$username}',user_level='{$level}',status='{$status}' WHERE id='{$db->escape($id)}'";
